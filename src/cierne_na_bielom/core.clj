@@ -7,7 +7,49 @@
 (def url "http://www.ciernenabielom.sk/uvod/strana-")
 
 
-(def wanted-authors #{"sloboda" "mitana" "hojč" "vilikovský" "dostojevskij"})
+(def wanted-authors #{"andruchovyč" "andrejev"
+                      "alighieri"                           ;bozska komedia
+                      "belyj"                               ;peterburg
+                      "beckett"                             ;molloy
+                      "bernanos"                            ;dennik vidieckeho knaza
+                      "bondy"
+                      "borges"                              ;spisy, cela kniznica
+                      "canetti"                             ;zaslepeni
+                      "céline"                              ;cesta do hlbin noci
+                      "celine"
+                      "carpentier"                          ;stratene kroky
+                      "cohen"                               ;mila pane (her lover)
+                      "dostojevskij" "dušek"
+                      "földvári"
+                      "gombrowicz"                          ;kosmos
+                      "grossman"                            ;david, viz laska
+                      "jančar"                              ;Drago, Kateřina, páv a jezuita
+                      "karous"
+                      "kiš"
+                      "lasica"
+                      "márai"
+                      "mann"                                ;magicka hora
+                      "mitana"
+                      "morante"                             ;pribeh v dejinach
+                      "musil"                               ;muz bez  vlastnosti
+                      "nabokov"                             ;pozvanie na popravu, prednasky o ruskej literature, lolita
+                      "pištánek"
+                      "plat"
+                      "platonov"                            ;cevengur
+                      "rakús"
+                      "satinský"
+                      "sabato"                              ;tunel samoty
+                      "saramago"                            ;mesto slepych
+                      "sartre"                              ;hnus a ine
+                      "singer"                              ;kejklir z lubliny
+                      "sloboda"
+                      "solženicyn"                          ;prvy kruh, polostrovie gulag
+                      "staviarsky" "štrpka" "tatarka"
+                      "tournier"                            ;kral tmy
+                      "ulická"                              ;medea a jej deti
+                      "vaculík" "vilikovský"
+
+                      })
 
 
 
@@ -15,7 +57,7 @@
 
 (defn get-book-data
   [n]
-  (-> (str url n "/")
+  (-> (str url (inc n) "/")
       slurp
       parse
       (extract-from ".foot-line" [:name :author :url :img] "h2 a.nazov" text "h2 a" text "h2 a.nazov" (attr :href) ".foot-img-cont a" (attr :href))))
@@ -30,7 +72,7 @@
 
 (defn get-latest
   []
-  (flatten (for [n [1 2 3 4 5]]
+  (flatten (for [n (range 10)]
              (get-wanted-books n))))
 
 

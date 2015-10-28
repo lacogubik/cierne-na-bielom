@@ -1,5 +1,7 @@
-(ns cierne-na-bielom.core
-  (:gen-class)
+(ns cierne
+  (:gen-class
+    :methods [^:static [handler [String] String]])
+
   (:require [reaver :refer [parse extract-from text attr edn]]
             [clojure.string :as string]))
 
@@ -15,8 +17,6 @@
                       "bondy"
                       "borges"                              ;spisy, cela kniznica
                       "canetti"                             ;zaslepeni
-                      "céline"                              ;cesta do hlbin noci
-                      "celine"
                       "carpentier"                          ;stratene kroky
                       "cohen"                               ;mila pane (her lover)
                       "dostojevskij" "dušek"
@@ -25,18 +25,20 @@
                       "grossman"                            ;david, viz laska
                       "jančar"                              ;Drago, Kateřina, páv a jezuita
                       "karous"
-                      "kiš"
+                      "kameníček"
+                      "kiš"                                 ;encyklopedia mrtvych, hrobka borisa davidovica
                       "lasica"
                       "márai"
                       "mann"                                ;magicka hora
+                      "mlynárik"
                       "mitana"
                       "morante"                             ;pribeh v dejinach
                       "musil"                               ;muz bez  vlastnosti
                       "nabokov"                             ;pozvanie na popravu, prednasky o ruskej literature, lolita
+                      "pecka"
                       "pištánek"
-                      "plat"
                       "platonov"                            ;cevengur
-                      "rakús"
+                      "rakús"                               ;Mačacia krajina
                       "satinský"
                       "sabato"                              ;tunel samoty
                       "saramago"                            ;mesto slepych
@@ -44,10 +46,13 @@
                       "singer"                              ;kejklir z lubliny
                       "sloboda"
                       "solženicyn"                          ;prvy kruh, polostrovie gulag
-                      "staviarsky" "štrpka" "tatarka"
+                      "staviarsky"
+                      "suk"                                 ;Labyrintem revoluce
+                      "štrpka" "tatarka"
                       "tournier"                            ;kral tmy
                       "ulická"                              ;medea a jej deti
-                      "vaculík" "vilikovský"
+                      "vaculík"                             ;morcata
+                      "vilikovský"
 
                       })
 
@@ -64,6 +69,7 @@
 
 (defn get-wanted-books
   [n]
+  (print "Fetching page " n)
   (let [data (get-book-data n)]
     (->>
       data
@@ -90,7 +96,10 @@
 ; email result
 ;
 
-(defn -main
-  "I don't do a whole lot ... yet."
-  [& args]
-  (println "Hello, World!"))
+(defn -handler [s]
+  (find-wanted))
+
+;(defn -main
+;  "I don't do a whole lot ... yet."
+;  [& args]
+;  (println "Hello, World!"))

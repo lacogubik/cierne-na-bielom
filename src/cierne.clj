@@ -22,7 +22,6 @@
                       "dostojevskij" "dušek"
                       "földvári"
                       "gombrowicz"                          ;kosmos
-                      "grossman"                            ;david, viz laska
                       "jančar"                              ;Drago, Kateřina, páv a jezuita
                       "karous"
                       "kameníček"
@@ -69,7 +68,7 @@
 
 (defn get-wanted-books
   [n]
-  (print "Fetching page " n)
+  (println "Fetching page " n)
   (let [data (get-book-data n)]
     (->>
       data
@@ -78,7 +77,7 @@
 
 (defn get-latest
   []
-  (flatten (for [n (range 10)]
+  (flatten (for [n (range 50)]
              (get-wanted-books n))))
 
 
